@@ -75,11 +75,12 @@ Rating.belongsTo(Device)
 Device.hasMany(BasketDevise)
 BasketDevise.belongsTo(Device)
 
-Device.hasMany(DeviceInfo)
+Device.hasMany(DeviceInfo, {as: 'info'})//укз название поля которая будет в массиве отвечать за этот модуль
 DeviceInfo.belongsTo(Device)
 // мн к мн
 Type.belongsToMany(Brand, {through: TypeBrand}) //для связи нужно вызвать фун
 Brand.belongsToMany(Type, {through: TypeBrand})
+
 // экспортируем
 module.exports={
     User, 

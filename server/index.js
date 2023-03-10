@@ -10,6 +10,10 @@ const router = require('./routers/index')
 const cors = require('cors')
 // импорт фрайма 
 const express = require('express') 
+// импорт для чтения файлов - картинок
+const fileUpload = require('express-fileupload')
+// имп из node 
+const path = require('path')
 // импорт мидлвайера
 const errorHandler = require('./middleware/errorHandingMiddleware')
 // порт для приложения из env если не задана то укз свою
@@ -21,6 +25,10 @@ const app = express()
 app.use(cors())
 // для парсинга в json формат
 app.use(express.json())
+// для get запроса по юрл кратинок использ фрейм express
+app.use(express.static(path.resolve(__dirname, 'static')))
+// регестрируем для картинок
+app.use(fileUpload({}))//передаем пустой объект с опциями
 // подкл роутеры
 app.use('/api', router)
 
