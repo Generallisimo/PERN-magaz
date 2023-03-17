@@ -11,3 +11,19 @@ sudo npm i -D nodemon для того чтобы авто перезагрузк
 для чтения картинок нужна зависимость которая читает файлы -  npm i express-fileupload
 для генерации имени файлов - npm i uuid
 для генреции tokena и крипт для шифра и не хранить в открытом виде ключ- npm i jsonwebtoken bcrypt 
+установка frontend
+React установка npx create-react-app . (здесь вместо точки название проекта либо точка значит в папку уст)
+для работы с react в папку node нужно установить mkdir .cache и через chmod -R 777 дать файлу права
+подвязываем сайту компоненты npm i axios react-router-dom mobx mobx-react-lite для запросов роутеров и состояния приложения и для связки с компонентами
+React bootstrap - npm i react-bootstrap bootstrap для связки 
+структура store - хранение данных pages - для стр components - для навбаров итд
+Так выглядит основа на Rect
+    function () {
+        return (
+        <div className="">
+            
+        </div>
+        );
+    }
+    
+    export default ; 
