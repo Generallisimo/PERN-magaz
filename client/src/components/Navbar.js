@@ -5,10 +5,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import { NavLink } from 'react-router-dom';
-import { SHOP_ROUTER } from '../utils/components';
-
-
-function NavbarRouter() {
+import { ADMIN_ROUTER, LOGIN_ROUTER, SHOP_ROUTER } from '../utils/components';
+import {observer} from "mobx-react-lite";
+import { useNavigate } from "react-router-dom";
+// для того чтобы страница перерендивалась в режиме рельного времени мы используме фун от mbox - observe
+const NavbarRouter = observer(() => {
+  const Navigate = useNavigate()
 // водим контекст для навбара так как он будет менятся при регестр польз
 const{user}=useContext(Context)
     return (
@@ -21,8 +23,8 @@ const{user}=useContext(Context)
             {user.isAuth ?
                 <Nav className="ml-auto" style={{color:'white'}}>
                     {/* можно укз вариант из bootstrap */}
-                        <Button variant={'outline-light'}>Админ Панель</Button>
-                        <Button variant={'outline-light'} className="ml-4">Выйти</Button>
+                        <Button onClick={()=> Navigate(ADMIN_ROUTER)} variant={'outline-light'}>Админ Панель</Button>
+                        <Button onClick={()=> Navigate(LOGIN_ROUTER)} variant={'outline-light'} className="ml-4">Выйти</Button>
                 </Nav>
             :
                 <Nav className="ml-auto" style={{color:'white'}}>
@@ -32,7 +34,7 @@ const{user}=useContext(Context)
         </Container>
       </Navbar>
     );
-  }
+  })
   
   export default NavbarRouter;
   
