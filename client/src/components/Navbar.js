@@ -8,8 +8,9 @@ import { NavLink } from 'react-router-dom';
 import { ADMIN_ROUTER, LOGIN_ROUTER, SHOP_ROUTER } from '../utils/components';
 import {observer} from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
+
 // для того чтобы страница перерендивалась в режиме рельного времени мы используме фун от mbox - observe
-const NavbarRouter = observer(() => {
+function NavbarRouter()  {
   const Navigate = useNavigate()
 // водим контекст для навбара так как он будет менятся при регестр польз
 const{user}=useContext(Context)
@@ -34,7 +35,7 @@ const{user}=useContext(Context)
         </Container>
       </Navbar>
     );
-  })
+  }
   
-  export default NavbarRouter;
+  export default observer(NavbarRouter);
   

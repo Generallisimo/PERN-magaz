@@ -1,6 +1,8 @@
 // навигация по страницу
 // импорт router
 
+
+import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import {Routes, Route, Navigate} from "react-router-dom"
 import { Context } from "..";
@@ -19,7 +21,7 @@ function AppRouter() {
         {/* имп массив с роутами который доступ ток авторизованому и пробегаемся по нему дела десктрутуризацию(присваеваем к массив к нескольким элементам) и вытаскиваем путь и компанет */}
         {user.isAuth && authRoutes.map(({path, Component})=>//проверям, если путь равен тру, то пропуска
         // и для каждого элемента в массиве мы отрисовываем путь и страницу
-            <Route key={path} path={path} element={<Component/>} />//exact - путь должен точно совпадать и укз ключ к стр то есть путь, так как он должен быть уникальным
+            <Route key={path} path={path} element={<Component/>}/>//exact - путь должен точно совпадать и укз ключ к стр то есть путь, так как он должен быть уникальным
         )}
         {/* для публичного доступа */}
         { publicRoutes.map(({path, Component})=>
@@ -31,4 +33,4 @@ function AppRouter() {
   );
 }
 
-export default AppRouter;
+export default observer(AppRouter);

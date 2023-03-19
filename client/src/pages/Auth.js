@@ -2,28 +2,45 @@ import Container from "react-bootstrap/esm/Container";
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/esm/Button";
-import { NavLink, useLocation } from "react-router-dom";
-import { LOGIN_ROUTER, REGISTRETION_ROUTER } from "../utils/components";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { LOGIN_ROUTER, REGISTRETION_ROUTER, SHOP_ROUTER } from "../utils/components";
 import { login, registretion } from "../http/userAPI";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Context } from "..";
+import { observer } from "mobx-react-lite";
 
 // страница для вывода
 function Auth() {
-    
+    // после того когда пользователь зареган мы его выводим на страницу
+    const Navigate = useNavigate()
+    // добавяем с помощью хука user который будет выводить информацию из нашей фун для рег и авториз
+    const {user} = useContext(Context)
     // с помощью хука можно получить маршрут в строке запроса
     const location = useLocation()
     // создаем переменную которая будет тру если совпадает с маршрутом
     const isLogin = location.pathname === LOGIN_ROUTER
     // создадим фун для регистрации и авторизации
     const click = async () => {
+        // помистим все в try если будет ошибка, чтобы выводил
+        try{
+        // создадим переменную которая будет юзером чтобы мы получали его
+        let data
         // делаем проверку 
         if(isLogin){//если логин то запрос на авторизацию
-            const response = await login()
-            console.log(response)
+            data = await login(email, password)
+            // console.log(response)
         }else{//если рег то на регестрацию
             // здесь мы импорт фун которые мы создадали для них
-            const response = await registretion(email, password)//передаем получение переменных
-            console.log(response)
+            data = await registretion(email, password)//передаем получение переменных
+            // console.log(response)
+        }
+        // с помощью созданого нами стора из mbox мы вызываем нашу фун которая отвечает за получение польз дынные и подтверждения что польз зареган
+        user.setUser(data)
+        user.setIsAuth(true)
+        // если все успешно то отправляем польз на главную стр
+        Navigate(SHOP_ROUTER)
+        } catch(e){
+            alert(e.response.data.message)//выводим ошибку из полученных данных если польз зареган
         }
     }
     // так как инпуты у нас еще не принимают в себя ничего то мы создаем им состояния c хуком первое хранит в себе состояние второе его измену принимает 
@@ -79,6 +96,6 @@ function Auth() {
       </div>
     );
   }
-  
-  export default Auth;
+//   делаем фун всегда реактивной и так можем действия совершать
+  export default observer(Auth);
   

@@ -4,7 +4,7 @@ import ListGroup from "react-bootstrap/esm/ListGroup";
 import {observer} from "mobx-react-lite";
 
 
-const TypeBar = observer(() => {
+function TypeBar() {
     // проводим дискрутизацию с помощью хука
     const {device} = useContext(Context)
     return (
@@ -28,7 +28,7 @@ const TypeBar = observer(() => {
             </ListGroup>
         </div>
     );
-})
+}
   
-  export default TypeBar;
+  export default observer(TypeBar);
 

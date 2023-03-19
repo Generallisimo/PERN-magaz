@@ -4,7 +4,7 @@ import {makeAutoObservable} from 'mobx';
 export default class UseerStore {
     // создаем конструктор он будет вызываться при создание объекта
     constructor(){
-        this._isAuth = true //нижнее подчеркивание для того чтобы перменная не могла изменяться
+        this._isAuth = false //нижнее подчеркивание для того чтобы перменная не могла изменяться
         this._user = {}
         makeAutoObservable(this)//будет следить за переменными и их изменениями при них компаненты будут  перерендеватся 
     }

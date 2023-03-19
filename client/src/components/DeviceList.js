@@ -9,7 +9,7 @@ import Col from "react-bootstrap/esm/Col";
 import { useNavigate } from "react-router-dom"
 import { DEVICE_ROUTER } from "../utils/components";
 
-const DeviceList = observer(() => {
+function DeviceList() {
     // для динамического перехода по странице мы используем хук навигации
     const Navigate = useNavigate()
     // проводим дискрутизацию с помощью хука
@@ -28,5 +28,5 @@ const DeviceList = observer(() => {
             )}
         </Row>
     )
-})
-export default DeviceList;
+}
+export default observer(DeviceList);
