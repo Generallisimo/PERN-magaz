@@ -9,7 +9,11 @@ const jwt = require('jsonwebtoken')
 // создаем генерацию где будут передаваться в массив id email и role
 const generateJwt = (id, email, role)=>{
     //первым параметром передается ключ основной,который хэшируется и  вторым секретный(ENV.), третье это опции - которые отвчеает токен(срок годности)
-    return jwt.sign({id, email, role}, process.env.SECRET_KEY, {expiresIn:'24h'})
+    return jwt.sign(
+        {id, email, role},
+        process.env.SECRET_KEY,
+        {expiresIn: '24h'}
+    )
 }
 // создаем класс для группировки 
 class UserController {
@@ -33,7 +37,7 @@ class UserController {
         const basket =  await Basket.create({userId: user.id})//создаем корзину из уже зарегестированого пользователя
         // создаем токен для пользователя 
          const token = generateJwt(user.id, user.email, user.role)
-        return res.json(token)
+        return res.json({token})
     }
     async login(req, res, next){
         // вход
@@ -48,12 +52,13 @@ class UserController {
             return next(ApiError.internal("Пароль неверный"))
         }
         const token = generateJwt(user.id, user.email, user.role)
-        return res.json(token)
+        return res.json({token})
     }
     async check(req, res, next){
         // генерируем и получаем токен
         const token = generateJwt(req.user.id, req.user.email, req.user.role)
         return res.json({token})   
+        // res.json({message:"ALL"})
 
         // проверка на ошибку
         // const {id} = req.query // проверяем запрос
