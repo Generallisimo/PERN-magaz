@@ -9,8 +9,9 @@ import { useContext, useState } from "react";
 import { Context } from "..";
 import { observer } from "mobx-react-lite";
 
+
 // страница для вывода
-function Auth() {
+const Auth= observer(()=> {
     // после того когда пользователь зареган мы его выводим на страницу
     const Navigate = useNavigate()
     // добавяем с помощью хука user который будет выводить информацию из нашей фун для рег и авториз
@@ -28,7 +29,7 @@ function Auth() {
         // делаем проверку 
         if(isLogin){//если логин то запрос на авторизацию
             data = await login(email, password)
-            // console.log(response)
+            console.log(data)
         }else{//если рег то на регестрацию
             // здесь мы импорт фун которые мы создадали для них
             data = await registretion(email, password)//передаем получение переменных
@@ -37,8 +38,9 @@ function Auth() {
         // с помощью созданого нами стора из mbox мы вызываем нашу фун которая отвечает за получение польз дынные и подтверждения что польз зареган
         user.setUser(data)
         user.setIsAuth(true)
+        console.log(user.setUser(data))
         // если все успешно то отправляем польз на главную стр
-        Navigate(SHOP_ROUTER)
+        // Navigate(SHOP_ROUTER)
         } catch(e){
             alert(e.response.data.message)//выводим ошибку из полученных данных если польз зареган
         }
@@ -47,8 +49,8 @@ function Auth() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     return (
-      <div className="auth">
-        {/* центруем надпись от высоты браузера */}
+
+        // {/* центруем надпись от высоты браузера */}
         <Container 
         className="d-flex justify-content-center aling-items-center" 
         style={{height: window.innerHeight - 54}}>
@@ -93,9 +95,8 @@ function Auth() {
                 </Form>
             </Card>
         </Container>
-      </div>
     );
-  }
+  })
 //   делаем фун всегда реактивной и так можем действия совершать
-  export default observer(Auth);
+  export default Auth;
   

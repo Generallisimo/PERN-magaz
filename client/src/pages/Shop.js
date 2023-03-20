@@ -4,8 +4,9 @@ import Col from "react-bootstrap/esm/Col";
 import TypeBar from "../components/TypeBar";
 import Brand from "../components/Brand";
 import DeviceList from "../components/DeviceList";
+import { observer } from "mobx-react-lite";
 
-function Shop() {
+const Shop= observer(() =>{
     return (
       <Container className="mt-2">
         <Row>
@@ -20,7 +21,7 @@ function Shop() {
         </Row>
       </Container>
     );
-  }
+  })
   
   export default Shop;
   

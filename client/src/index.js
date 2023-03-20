@@ -6,6 +6,7 @@ import UseerStore from './store/UserStore';
 // import reportWebVitals from './reportWebVitals';
 // предаем в контекст данные пропс которые позваялет быстро получить провайдер где мы можем передать наш объект
 export const Context = createContext(null)
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // создаем объект из нашего класса

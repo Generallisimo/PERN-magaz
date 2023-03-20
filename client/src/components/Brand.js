@@ -5,7 +5,7 @@ import Form  from "react-bootstrap/esm/Form";
 import  Card  from "react-bootstrap/esm/Card"
 
 
-function BrandType() {
+const BrandType=observer(()=> {
     // проводим дискрутизацию с помощью хука
     const {device} = useContext(Context)
     return (
@@ -27,7 +27,7 @@ function BrandType() {
             )}
         </Form>
     );
-}
+})
   
-  export default observer(BrandType);
+  export default BrandType;
 

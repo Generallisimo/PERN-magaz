@@ -9,7 +9,7 @@ import { Context } from "..";
 import { authRoutes, publicRoutes } from "../routes";
 import { SHOP_ROUTER } from "../utils/components";
 
-function AppRouter() {
+const AppRouter=observer(()=> {
     // cозд константу для того чтобы выводить авторизован польз или нет 1 способ
     // const isAuth = false
     // после полученного значения с mobx выводим
@@ -32,5 +32,5 @@ function AppRouter() {
     </Routes>
   );
 }
-
-export default observer(AppRouter);
+)
+export default AppRouter;
